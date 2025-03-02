@@ -1,0 +1,16 @@
+import axios from "axios";
+
+const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+
+export const getRecommendations = async (genre, num) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/recommend`, {
+      genre,
+      num_recommendations: num,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching recommendations:", error);
+    return { error: "Failed to fetch data" };
+  }
+};

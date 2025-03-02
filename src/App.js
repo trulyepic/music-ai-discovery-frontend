@@ -1,23 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import MusicDiscovery from "./components/MusicDiscovery";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-screen flex items-center justify-center bg-[#141922] text-[#E2E8F0] p-6">
+      <div className="w-full max-w-3xl p-6 bg-[#242c3a] rounded-lg shadow-lg border-2 border-[#4C51BF]">
+        <h1 className="text-4xl font-extrabold text-center mb-6 text-[#4C51BF]">
+          🎵 Track Discov
+        </h1>
+        <MusicDiscovery />
+      </div>
     </div>
   );
 }

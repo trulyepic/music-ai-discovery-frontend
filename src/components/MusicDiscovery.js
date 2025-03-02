@@ -149,7 +149,7 @@ const MusicDiscovery = () => {
             {/* 🎼 Top 10 Songs */}
             <div className="bg-[#2D3748] border-l-8 border-[#A3BFFA] p-4 rounded-md shadow-md">
               <h3 className="text-xl font-bold text-[#4C51BF]">
-                Top 10 Songs for {genre}
+                Top 10 Tracks for {genre}
               </h3>
               <ul className="mt-2 space-y-2">
                 {data.topSongs.map((song, index) => (

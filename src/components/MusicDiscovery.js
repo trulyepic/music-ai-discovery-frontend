@@ -131,7 +131,7 @@ const MusicDiscovery = () => {
                     d="M4 12a8 8 0 0116 0H4z"
                   ></path>
                 </svg>
-                Fetching...
+                Discoving...
               </>
             ) : (
               "🎶 Discov It!"

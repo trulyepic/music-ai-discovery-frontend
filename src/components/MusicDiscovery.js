@@ -149,7 +149,7 @@ const MusicDiscovery = () => {
             {/* 🎼 Top 10 Songs */}
             <div className="bg-[#2D3748] border-l-8 border-[#A3BFFA] p-4 rounded-md shadow-md">
               <h3 className="text-xl font-bold text-[#4C51BF]">
-                Top 10 Songs Based on {genre}
+                Top 10 Songs for {genre}
               </h3>
               <ul className="mt-2 space-y-2">
                 {data.topSongs.map((song, index) => (
@@ -162,7 +162,7 @@ const MusicDiscovery = () => {
 
             <div className="bg-[#1E293B] border-l-8 border-[#4C51BF] p-4 rounded-md shadow-md">
               <h3 className="text-xl font-bold text-[#A3BFFA]">
-                Song Recommendations Based on {genre}
+                Recommendations Based on Top 10
               </h3>
               <div className="mt-4 space-y-4">
                 {data.formattedRecommendations.length > 0 ? (

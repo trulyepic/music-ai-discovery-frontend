@@ -3,7 +3,6 @@ frontend:
   phases:
     preBuild:
       commands:
-        - nvm use 20
         - echo "REACT_APP_BASE_URL=https://music-ai-discovery-backend-production.up.railway.app" >> .env
     build:
       commands:

@@ -21,7 +21,7 @@ function App() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-[#141922] text-gray-900 dark:text-[#E2E8F0] p-6">
       <div className="w-full max-w-3xl p-6 bg-white dark:bg-[#242c3a] rounded-lg shadow-lg border-2 border-gray-300 dark:border-[#4C51BF]">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-4xl font-extrabold text-center mb-6 text-[#4C51BF]">
+          <h1 className="text-4xl font-extrabold text-center mb-6  text-gray-900 dark:text-[#4C51BF]">
             🎵 Track Discov
           </h1>
           <button

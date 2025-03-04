@@ -226,8 +226,10 @@ const MusicDiscovery = () => {
           <div className="space-y-6 mt-6">
             {/* 🎼 Top 10 Songs */}
             <div className="bg-gray-100 dark:bg-[#2D3748] border-l-8 border-[#A3BFFA] p-4 rounded-md shadow-md">
-              <h3 className="text-xl font-bold text-[#4C51BF]">
-                Top 10 Tracks for {genre}
+              <h3 className="text-xl font-bold text-gray-900 dark:text-[#4C51BF]">
+                {genre.trim().length > 0
+                  ? `Top 10 Tracks for ${genre}`
+                  : "Your Track List"}
               </h3>
               <ul className="mt-2 space-y-2">
                 {data.topSongs.map((song, index) => (
@@ -239,8 +241,10 @@ const MusicDiscovery = () => {
             </div>
 
             <div className="bg-gray-200 dark:bg-[#1E293B] border-l-8 border-[#4C51BF] p-4 rounded-md shadow-md">
-              <h3 className="text-xl font-bold text-[#A3BFFA]">
-                Recommendations Based on Top 10
+              <h3 className="text-xl font-bold text-gray-900 dark:text-[#4C51BF]">
+                {genre.trim().length > 0
+                  ? "Recommendations Based on Top 10"
+                  : "Recommendations Based on Your Tracks/Artists"}
               </h3>
               <div className="mt-4 space-y-4">
                 {data.formattedRecommendations.length > 0 ? (
@@ -249,7 +253,7 @@ const MusicDiscovery = () => {
                       key={index}
                       className="bg-gray-300 dark:bg-[#2D3748] p-4 rounded-md shadow-sm"
                     >
-                      <h4 className="text-lg font-semibold text-[#A3BFFA]">
+                      <h4 className="text-lg font-semibold  text-gray-900 dark:text-[#4C51BF]">
                         {rec.song}
                       </h4>
                       <p className="text-sm text-gray-800 dark:text-[#E2E8F0]">

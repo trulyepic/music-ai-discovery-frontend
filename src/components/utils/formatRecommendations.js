@@ -50,6 +50,7 @@ export const formatRecommendations = (recommendationText = "") => {
     }
 
     // 🚨 Ignore summary lines that don’t match song patterns
+    console.warn("Unmatched Line:", line);
   });
 
   return recommendations;

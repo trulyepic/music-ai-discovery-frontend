@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getRecommendations } from "./apis/api";
+import { getRecommendations, getRecommendationsByTrack } from "./apis/api";
 import { formatRecommendations } from "./utils/formatRecommendations";
 
 const MusicDiscovery = () => {
@@ -8,6 +8,7 @@ const MusicDiscovery = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [tracks, setTracks] = useState([""]);
 
   // 🔥 Function to process and extract the correct keys dynamically
   const processData = (apiData, genre) => {
@@ -33,43 +34,99 @@ const MusicDiscovery = () => {
     setData(null);
     setLoading(true);
 
-    if (!genre.trim()) {
-      setError("⚠️ Please enter a genre.");
+    let result;
+    if (tracks.some((track) => track.trim())) {
+      result = await getRecommendationsByTrack(tracks, numRecommendations);
+    } else if (genre.trim()) {
+      result = await getRecommendations(genre, numRecommendations);
+    } else {
+      setError("⚠️ Please enter a genre or at least one track.");
       setLoading(false);
       return;
     }
 
-    const result = await getRecommendations(genre, numRecommendations);
-    console.log("API Response:", result);
     if (result.error) {
       setError(result.error);
     } else {
-      //   setData(processData(result, genre));
-
-      const processedData = processData(result);
-      // 🔥 Extract recommendations safely
-      const recommendationsKey = Object.keys(result).find((key) =>
-        key.startsWith(`Song Recommendations Based on`)
-      );
-      const rawRecommendations = recommendationsKey
-        ? result[recommendationsKey]
-        : "";
-
-      console.log("Extracted Recommendations:", rawRecommendations);
       setData({
-        ...processedData,
-        recommendations: rawRecommendations,
-        formattedRecommendations: formatRecommendations(rawRecommendations),
+        topSongs: result.topSongs || [],
+        recommendations: result.recommendations || "",
+        formattedRecommendations: formatRecommendations(
+          result.recommendations || ""
+        ),
       });
     }
     setLoading(false);
   };
+
+  //   const handleFetch = async () => {
+  //     setError("");
+  //     setData(null);
+  //     setLoading(true);
+
+  //     if (!genre.trim()) {
+  //       setError("⚠️ Please enter a genre.");
+  //       setLoading(false);
+  //       return;
+  //     }
+
+  //     const result = await getRecommendations(genre, numRecommendations);
+  //     console.log("API Response:", result);
+  //     if (result.error) {
+  //       setError(result.error);
+  //     } else {
+  //       //   setData(processData(result, genre));
+
+  //       const processedData = processData(result);
+  //       // 🔥 Extract recommendations safely
+  //       const recommendationsKey = Object.keys(result).find((key) =>
+  //         key.startsWith(`Song Recommendations Based on`)
+  //       );
+  //       const rawRecommendations = recommendationsKey
+  //         ? result[recommendationsKey]
+  //         : "";
+
+  //       console.log("Extracted Recommendations:", rawRecommendations);
+  //       setData({
+  //         ...processedData,
+  //         recommendations: rawRecommendations,
+  //         formattedRecommendations: formatRecommendations(rawRecommendations),
+  //       });
+  //     }
+  //     setLoading(false);
+  //   };
 
   return (
     <div className="space-y-6 flex flex-col">
       <div className="flex-grow">
         {/* User Inputs */}
         <div className="space-y-4">
+          <label className="block text-lg font-semibold text-[#A3BFFA]">
+            Enter up to 10 Tracks/Artist (Track - Artist or Track or Artist):
+          </label>
+          {tracks.map((track, index) => (
+            <input
+              key={index}
+              type="text"
+              value={track}
+              onChange={(e) => {
+                const newTracks = [...tracks];
+                newTracks[index] = e.target.value;
+                setTracks(newTracks);
+              }}
+              placeholder="e.g, Blinding Lights - The Weeknd or Blinding Lights or The Weeknd"
+              className="w-full p-3 bg-[#4A5568] text-[#E2E8F0] rounded-md focus:ring-2 focus:ring-[#4C51BF] outline-none"
+            />
+          ))}
+          {tracks.length < 10 && (
+            <button
+              onClick={() => setTracks([...tracks, ""])}
+              className="bg-[#4C51BF] text-white px-4 py-2 rounded-md hover:bg-[#3C40A0]"
+            >
+              {" "}
+              + Add Another Track
+            </button>
+          )}
           <label className="block text-lg font-semibold text-[#A3BFFA]">
             Genre:
           </label>

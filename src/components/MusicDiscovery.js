@@ -101,7 +101,7 @@ const MusicDiscovery = () => {
       <div className="flex-grow">
         {/* User Inputs */}
         <div className="space-y-4">
-          <label className="block text-lg font-semibold text-[#A3BFFA]">
+          <label className="block text-lg font-semibold text-gray-700 dark:text-[#A3BFFA]">
             Enter up to 10 Tracks/Artist (Track - Artist or Track or Artist):
           </label>
           {tracks.map((track, index) => (
@@ -119,8 +119,8 @@ const MusicDiscovery = () => {
               disabled={genre.trim().length > 0}
               className={`w-full p-3 rounded-md focus:ring-2 outline-none transition ${
                 genre.trim().length > 0
-                  ? "bg-gray-600 text-gray-400 cursor-not-allowed"
-                  : "bg-[#4A5568] text-[#E2E8F0] focus:ring-[#4C51BF]"
+                  ? "bg-gray-400 text-gray-600 dark:bg-gray-600 dark:text-gray-400 cursor-not-allowed"
+                  : "bg-gray-200 text-gray-900 dark:bg-[#4A5568] dark:text-[#E2E8F0] focus:ring-[#4C51BF]"
               }`}
             />
           ))}
@@ -130,15 +130,15 @@ const MusicDiscovery = () => {
               disabled={genre.trim().length > 0}
               className={`px-4 py-2 rounded-md transition ${
                 genre.trim().length > 0
-                  ? "bg-gray-600 text-gray-400 cursor-not-allowed"
-                  : "bg-[#4C51BF] text-white hover:bg-[#3C40A0]"
+                  ? "bg-gray-400 text-gray-600 dark:bg-gray-600 dark:text-gray-400 cursor-not-allowed"
+                  : "bg-gray-800 text-white hover:bg-gray-700 dark:bg-[#4C51BF] dark:hover:bg-[#3C40A0]"
               }`}
             >
               {" "}
               + Add Another Track
             </button>
           )}
-          <label className="block text-lg font-semibold text-[#A3BFFA]">
+          <label className="block text-lg font-semibold text-gray-700 dark:text-[#A3BFFA]">
             Genre:
           </label>
           <input
@@ -152,12 +152,12 @@ const MusicDiscovery = () => {
             disabled={tracks.some((track) => track.trim())}
             className={`w-full p-3 rounded-md focus:ring-2 outline-none transition ${
               tracks.some((track) => track.trim())
-                ? "bg-gray-600 text-gray-400 cursor-not-allowed"
-                : "bg-[#4A5568] text-[#E2E8F0] focus:ring-[#4C51BF]"
+                ? "bg-gray-400 text-gray-600 dark:bg-gray-600 dark:text-gray-400 cursor-not-allowed"
+                : "bg-gray-200 text-gray-900 dark:bg-[#4A5568] dark:text-[#E2E8F0] focus:ring-[#4C51BF]"
             }`}
           />
 
-          <label className="block text-lg font-semibold text-[#A3BFFA]">
+          <label className="block text-lg font-semibold text-gray-700 dark:text-[#A3BFFA]">
             Number of tracks:
           </label>
           <input
@@ -170,11 +170,13 @@ const MusicDiscovery = () => {
             }
             min="1"
             max="30"
-            className="w-full p-3 bg-[#4A5568] text-[#E2E8F0] rounded-md focus:ring-2 focus:ring-[#4C51BF] outline-none"
+            c
+            className="w-full p-3 bg-gray-200 text-gray-900 dark:bg-[#4A5568] dark:text-[#E2E8F0] rounded-md focus:ring-2 focus:ring-[#4C51BF] outline-none"
           />
 
-          <p className="text-[#a3befaa0] text-sm">
-            🔹 Select between <strong>1</strong> and <strong>30</strong> tracks.
+          <p className="text-gray-700 dark:text-[#a3befaa0] text-sm">
+            <span className="text-gray-800 dark:text-gray-300">🔹</span>
+            Select between <strong>1</strong> and <strong>30</strong> tracks.
           </p>
 
           {/* ✅ Button with Spinner */}
@@ -183,8 +185,8 @@ const MusicDiscovery = () => {
             disabled={loading}
             className={`w-full font-semibold py-3 rounded-md transition duration-300 flex justify-center items-center mt-6 ${
               loading
-                ? "bg-[#4C51BF] opacity-70 cursor-not-allowed"
-                : "bg-[#4C51BF] hover:bg-[#3C40A0] text-white"
+                ? "bg-gray-400 text-gray-600 dark:bg-[#4C51BF] dark:opacity-70 cursor-not-allowed"
+                : "bg-gray-800 text-white hover:bg-gray-700 dark:bg-[#4C51BF] dark:hover:bg-[#3C40A0]"
             }`}
           >
             {loading ? (
@@ -223,20 +225,20 @@ const MusicDiscovery = () => {
         {data && (
           <div className="space-y-6 mt-6">
             {/* 🎼 Top 10 Songs */}
-            <div className="bg-[#2D3748] border-l-8 border-[#A3BFFA] p-4 rounded-md shadow-md">
+            <div className="bg-gray-100 dark:bg-[#2D3748] border-l-8 border-[#A3BFFA] p-4 rounded-md shadow-md">
               <h3 className="text-xl font-bold text-[#4C51BF]">
                 Top 10 Tracks for {genre}
               </h3>
               <ul className="mt-2 space-y-2">
                 {data.topSongs.map((song, index) => (
-                  <li key={index} className="text-[#E2E8F0]">
+                  <li key={index} className="text-gray-900 dark:text-[#E2E8F0]">
                     🎵 {song}
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="bg-[#1E293B] border-l-8 border-[#4C51BF] p-4 rounded-md shadow-md">
+            <div className="bg-gray-200 dark:bg-[#1E293B] border-l-8 border-[#4C51BF] p-4 rounded-md shadow-md">
               <h3 className="text-xl font-bold text-[#A3BFFA]">
                 Recommendations Based on Top 10
               </h3>
@@ -245,19 +247,21 @@ const MusicDiscovery = () => {
                   data.formattedRecommendations.map((rec, index) => (
                     <div
                       key={index}
-                      className="bg-[#2D3748] p-4 rounded-md shadow-sm"
+                      className="bg-gray-300 dark:bg-[#2D3748] p-4 rounded-md shadow-sm"
                     >
                       <h4 className="text-lg font-semibold text-[#A3BFFA]">
                         {rec.song}
                       </h4>
-                      <p className="text-sm text-[#E2E8F0] font-medium">
+                      <p className="text-sm text-gray-800 dark:text-[#E2E8F0]">
                         🎤 {rec.artist}
                       </p>
-                      <p className="text-[#E2E8F0]">{rec.description}</p>
+                      <p className="text-gray-800 dark:text-[#E2E8F0]">
+                        {rec.description}
+                      </p>
                     </div>
                   ))
                 ) : (
-                  <p className="text-[#E2E8F0]">
+                  <p className="text-gray-900 dark:text-[#E2E8F0]">
                     No structured recommendations available.
                   </p>
                 )}
@@ -266,12 +270,12 @@ const MusicDiscovery = () => {
           </div>
         )}
       </div>
-      <footer className="text-center py-4 mt-10 bg-[#2D3748] rounded-lg shadow-md border-t border-[#4C51BF]">
+      {/* <footer className="text-center py-4 mt-10 bg-[#2D3748] rounded-lg shadow-md border-t border-[#4C51BF]">
         <p className="text-[#A3BFFA] text-sm font-medium">
           Powered by <span className="text-[#c0c3f3] font-bold">OpenAI</span> &{" "}
           <span className="text-[#c0c3f3] font-bold">Last.fm</span>
         </p>
-      </footer>
+      </footer> */}
     </div>
   );
 };

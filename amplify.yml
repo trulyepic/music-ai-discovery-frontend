@@ -6,7 +6,7 @@ frontend:
         - echo "REACT_APP_BASE_URL=https://music-ai-discovery-backend-production.up.railway.app" >> .env
     build:
       commands:
-        - npm install --legacy-peer-deps
+        - npm install
         - npm run build
   artifacts:
     baseDirectory: build

@@ -59,43 +59,6 @@ const MusicDiscovery = () => {
     setLoading(false);
   };
 
-  //   const handleFetch = async () => {
-  //     setError("");
-  //     setData(null);
-  //     setLoading(true);
-
-  //     if (!genre.trim()) {
-  //       setError("⚠️ Please enter a genre.");
-  //       setLoading(false);
-  //       return;
-  //     }
-
-  //     const result = await getRecommendations(genre, numRecommendations);
-  //     console.log("API Response:", result);
-  //     if (result.error) {
-  //       setError(result.error);
-  //     } else {
-  //       //   setData(processData(result, genre));
-
-  //       const processedData = processData(result);
-  //       // 🔥 Extract recommendations safely
-  //       const recommendationsKey = Object.keys(result).find((key) =>
-  //         key.startsWith(`Song Recommendations Based on`)
-  //       );
-  //       const rawRecommendations = recommendationsKey
-  //         ? result[recommendationsKey]
-  //         : "";
-
-  //       console.log("Extracted Recommendations:", rawRecommendations);
-  //       setData({
-  //         ...processedData,
-  //         recommendations: rawRecommendations,
-  //         formattedRecommendations: formatRecommendations(rawRecommendations),
-  //       });
-  //     }
-  //     setLoading(false);
-  //   };
-
   return (
     <div className="space-y-6 flex flex-col">
       <div className="flex-grow">
@@ -124,20 +87,31 @@ const MusicDiscovery = () => {
               }`}
             />
           ))}
-          {tracks.length < 10 && (
-            <button
-              onClick={() => setTracks([...tracks, ""])}
-              disabled={genre.trim().length > 0}
-              className={`px-4 py-2 rounded-md transition ${
-                genre.trim().length > 0
-                  ? "bg-gray-400 text-gray-600 dark:bg-gray-600 dark:text-gray-400 cursor-not-allowed"
-                  : "bg-gray-800 text-white hover:bg-gray-700 dark:bg-[#4C51BF] dark:hover:bg-[#3C40A0]"
-              }`}
-            >
-              {" "}
-              + Add Another Track
-            </button>
-          )}
+          <div className="flex space-x-2">
+            {tracks.length < 10 && (
+              <button
+                onClick={() => setTracks([...tracks, ""])}
+                disabled={genre.trim().length > 0}
+                className={`px-4 py-2 rounded-md transition ${
+                  genre.trim().length > 0
+                    ? "bg-gray-400 text-gray-600 dark:bg-gray-600 dark:text-gray-400 cursor-not-allowed"
+                    : "bg-gray-800 text-white hover:bg-gray-700 dark:bg-[#4C51BF] dark:hover:bg-[#3C40A0]"
+                }`}
+              >
+                {" "}
+                + Add Another Track
+              </button>
+            )}
+            {/* Only Show Remove Button if More Than 1 Track */}
+            {tracks.length > 1 && (
+              <button
+                onClick={() => setTracks(tracks.slice(0, -1))}
+                className="px-4 py-2 rounded-md transition bg-red-600 text-white hover:bg-red-500"
+              >
+                - Remove Last Track
+              </button>
+            )}
+          </div>
           <label className="block text-lg font-semibold text-gray-700 dark:text-[#A3BFFA]">
             Genre:
           </label>

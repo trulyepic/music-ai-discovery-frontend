@@ -113,15 +113,26 @@ const MusicDiscovery = () => {
                 const newTracks = [...tracks];
                 newTracks[index] = e.target.value;
                 setTracks(newTracks);
+                setGenre("");
               }}
               placeholder="e.g, Blinding Lights - The Weeknd or Blinding Lights or The Weeknd"
-              className="w-full p-3 bg-[#4A5568] text-[#E2E8F0] rounded-md focus:ring-2 focus:ring-[#4C51BF] outline-none"
+              disabled={genre.trim().length > 0}
+              className={`w-full p-3 rounded-md focus:ring-2 outline-none transition ${
+                genre.trim().length > 0
+                  ? "bg-gray-600 text-gray-400 cursor-not-allowed"
+                  : "bg-[#4A5568] text-[#E2E8F0] focus:ring-[#4C51BF]"
+              }`}
             />
           ))}
           {tracks.length < 10 && (
             <button
               onClick={() => setTracks([...tracks, ""])}
-              className="bg-[#4C51BF] text-white px-4 py-2 rounded-md hover:bg-[#3C40A0]"
+              disabled={genre.trim().length > 0}
+              className={`px-4 py-2 rounded-md transition ${
+                genre.trim().length > 0
+                  ? "bg-gray-600 text-gray-400 cursor-not-allowed"
+                  : "bg-[#4C51BF] text-white hover:bg-[#3C40A0]"
+              }`}
             >
               {" "}
               + Add Another Track
@@ -133,9 +144,17 @@ const MusicDiscovery = () => {
           <input
             type="text"
             value={genre}
-            onChange={(e) => setGenre(e.target.value)}
+            onChange={(e) => {
+              setGenre(e.target.value);
+              setTracks([""]); // Reset tracks when a genre is entered
+            }}
             placeholder="Enter genre (e.g., rock, pop)"
-            className="w-full p-3 bg-[#4A5568] text-[#E2E8F0] rounded-md focus:ring-2 focus:ring-[#4C51BF] outline-none"
+            disabled={tracks.some((track) => track.trim())}
+            className={`w-full p-3 rounded-md focus:ring-2 outline-none transition ${
+              tracks.some((track) => track.trim())
+                ? "bg-gray-600 text-gray-400 cursor-not-allowed"
+                : "bg-[#4A5568] text-[#E2E8F0] focus:ring-[#4C51BF]"
+            }`}
           />
 
           <label className="block text-lg font-semibold text-[#A3BFFA]">
